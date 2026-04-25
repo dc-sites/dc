@@ -7,13 +7,39 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ✅ Premium Features Section - Professional Style */
+        /* ✅ PREMIUM PRICING & INTERACTIVE STYLES */
+        .pricing-grid { margin-bottom: 40px; }
+        .pricing-card { 
+            position: relative; display: flex; flex-direction: column; height: 100%; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            background: var(--bg-card); border: 1px solid var(--border); 
+            border-radius: var(--radius); padding: 24px;
+        }
+        .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+        .pricing-card.popular { border-color: var(--warning); box-shadow: 0 0 30px rgba(245, 158, 11, 0.2); }
+        .popular-badge { 
+            position: absolute; top: -12px; right: 20px; background: var(--warning); 
+            color: #000; padding: 5px 16px; border-radius: 20px; 
+            font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; 
+        }
+        .price-section { text-align: center; margin: 20px 0; }
+        .old-price { text-decoration: line-through; color: var(--text-muted); font-size: 16px; display: block; margin-bottom: 8px; }
+        /* ✅ KEEP DESKTOP SIZE ON MOBILE */
+        .new-price { font-size: 34px; font-weight: 800; color: var(--primary-light); display: block; }
+        .new-price span { font-size: 16px; font-weight: 500; color: var(--text-muted); }
+        .plan-desc { text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
+        .plan-features { list-style: none; padding: 0; margin: 0 0 24px 0; flex: 1; }
+        .plan-features li { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text-main); display: flex; align-items: center; gap: 12px; }
+        .plan-features li:last-child { border-bottom: none; }
+        .plan-features li i { color: var(--success); font-size: 16px; }
+        .discount-badge { display: inline-block; background: rgba(16, 185, 129, 0.15); color: var(--success); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+        
+        /* ✅ Premium Features Section */
         .features-section { margin: 40px 0; }
         .section-title {
             text-align: center; font-size: 26px; font-weight: 800; margin-bottom: 12px;
             background: linear-gradient(135deg, var(--primary-light), var(--text-bright));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
         }
         .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 32px; font-size: 15px; }
         .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -25,19 +51,15 @@
         .features-column::-webkit-scrollbar-track { background: transparent; }
         .features-column::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
         .feature-card {
-            display: flex; gap: 16px; padding: 18px; background: var(--bg-card);
+            display: flex; gap: 16px; padding: 18px; background: var(--bg-dark);
             border-radius: var(--radius-sm); border: 1px solid var(--border);
             transition: all var(--transition); align-items: flex-start;
         }
         .feature-card:hover {
             border-color: var(--primary); transform: translateX(6px);
-            background: rgba(108, 43, 217, 0.08);
-            box-shadow: 0 4px 12px rgba(108, 43, 217, 0.15);
+            background: rgba(108, 43, 217, 0.08); box-shadow: 0 4px 12px rgba(108, 43, 217, 0.15);
         }
-        .feature-gif {
-            width: 60px; height: 60px; border-radius: 12px; object-fit: cover;
-            flex-shrink: 0; background: var(--bg-dark); border: 2px solid var(--border);
-        }
+        .feature-gif { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; flex-shrink: 0; background: var(--bg-card); border: 2px solid var(--border); }
         .feature-info h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
         .feature-info p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0; }
         
@@ -45,74 +67,21 @@
         .testimonials-section { margin: 40px 0; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .testimonial-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 24px; transition: all var(--transition);
-            position: relative;
+            background: var(--bg-dark); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 24px; transition: all var(--transition); position: relative;
         }
         .testimonial-card::before {
             content: '"'; position: absolute; top: 16px; right: 24px;
             font-size: 60px; color: var(--primary); opacity: 0.2;
             font-family: serif; line-height: 1;
         }
-        .testimonial-card:hover {
-            border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow);
-        }
+        .testimonial-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow); }
         .testimonial-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
-        .testimonial-avatar {
-            width: 50px; height: 50px; border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--border);
-        }
+        .testimonial-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
         .testimonial-info { flex: 1; }
-        .testimonial-name {
-            font-weight: 700; font-size: 15px; color: var(--text-main);
-            display: flex; align-items: center; gap: 6px;
-        }
+        .testimonial-name { font-weight: 700; font-size: 15px; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
         .premium-badge-small { width: 16px; height: 16px; }
-        .testimonial-text {
-            font-size: 14px; color: var(--text-muted); line-height: 1.7;
-            margin: 0; font-style: italic;
-        }
-        
-        /* ✅ Pricing Cards - ORIGINAL SIZES PRESERVED */
-        .pricing-grid { margin-bottom: 40px; }
-        .pricing-card {
-            position: relative; display: flex; flex-direction: column; height: 100%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
-        .pricing-card.popular {
-            border-color: var(--warning); box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
-        }
-        .popular-badge {
-            position: absolute; top: -12px; right: 20px; background: var(--warning);
-            color: #000; padding: 5px 16px; border-radius: 20px;
-            font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
-        }
-        .price-section { text-align: center; margin: 20px 0; }
-        .old-price {
-            text-decoration: line-through; color: var(--text-muted);
-            font-size: 16px; display: block; margin-bottom: 8px;
-        }
-        /* ✅ ORIGINAL PRICE SIZE - DO NOT CHANGE */
-        .new-price { font-size: 34px; font-weight: 800; color: var(--primary-light); display: block; }
-        .new-price span { font-size: 16px; font-weight: 500; color: var(--text-muted); }
-        .plan-desc {
-            text-align: center; color: var(--text-muted); font-size: 14px;
-            margin-bottom: 24px; line-height: 1.6;
-        }
-        .plan-features { list-style: none; padding: 0; margin: 0 0 24px 0; flex: 1; }
-        .plan-features li {
-            padding: 12px 0; border-bottom: 1px solid var(--border);
-            font-size: 14px; color: var(--text-main);
-            display: flex; align-items: center; gap: 12px;
-        }
-        .plan-features li:last-child { border-bottom: none; }
-        .plan-features li i { color: var(--success); font-size: 16px; }
-        .discount-badge {
-            display: inline-block; background: rgba(16, 185, 129, 0.15);
-            color: var(--success); padding: 4px 12px; border-radius: 6px;
-            font-size: 12px; font-weight: 700; margin-bottom: 8px;
-        }
+        .testimonial-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin: 0; font-style: italic; }
         
         /* ✅ Mobile Responsive - Price Sizes PRESERVED */
         @media (max-width: 768px) {
@@ -122,9 +91,9 @@
             .feature-gif { width: 50px; height: 50px; }
             .testimonials-grid { grid-template-columns: 1fr; }
             .grid-equal { grid-template-columns: 1fr; }
-            .pricing-card { max-width: 400px; margin: 0 auto; }
-            /* ✅ PRICE SIZE KEPT ORIGINAL - NO CHANGE */
-            .new-price { font-size: 34px; }
+            /* ✅ PRICE SIZE KEPT EXACTLY AS DESKTOP (34px) */
+            .new-price { font-size: 34px !important; }
+            .pricing-card { max-width: 100%; margin: 0 auto; }
         }
         @media (max-width: 480px) {
             .section-title { font-size: 22px; }
@@ -132,7 +101,8 @@
             .feature-info h3 { font-size: 14px; }
             .feature-info p { font-size: 12px; }
             /* ✅ SMALL MOBILE - PRICE SIZE STILL PRESERVED */
-            .new-price { font-size: 34px; }
+            .new-price { font-size: 34px !important; }
+            .pricing-card { padding: 20px 16px; }
         }
     </style>
 </head>
@@ -173,14 +143,13 @@
                 </div>
             </div>
 
-            <!-- Hero Section -->
             <div class="hero-content text-center mb-3">
                 <img src="https://i.postimg.cc/nrFwN8kn/gem.png" alt="Premium Gem" style="width: 80px; margin-bottom: 16px;">
-                <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 12px;">Unlock Premium</h1>
+                <h1 style="font-size: 28px; font-weight: 800; margin-bottom: 12px;">Unlock Premium</h1>
                 <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 24px;">Get exclusive access to all features and take your learning experience to the next level!</p>
             </div>
 
-            <!-- ✅ Pricing Section (Original Sizes) -->
+            <!-- ✅ PRICING SECTION -->
             <div class="grid-equal pricing-grid">
                 <!-- Individual Plan -->
                 <div class="card pricing-card">
@@ -222,7 +191,7 @@
                 </div>
             </div>
 
-            <!-- ✅ Premium Features Section (Below Pricing) -->
+            <!-- ✅ PREMIUM FEATURES SECTION -->
             <div class="card features-section">
                 <h2 class="section-title">✨ Premium Features</h2>
                 <p class="section-subtitle">Everything you need to supercharge your learning</p>
@@ -232,17 +201,17 @@
                 </div>
             </div>
 
-            <!-- ✅ Testimonials Section -->
+            <!-- ✅ TESTIMONIALS SECTION -->
             <div class="card testimonials-section">
                 <h2 class="section-title">What Our Premium Users Say</h2>
                 <p class="section-subtitle">Join thousands of satisfied learners</p>
                 <div id="testimonials-grid" class="testimonials-grid"></div>
             </div>
 
-            <!-- ✅ CTA Section -->
+            <!-- ✅ CTA SECTION -->
             <div class="card text-center" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(108, 43, 217, 0.1) 100%); border-color: var(--primary);">
-                <h2 style="font-size: 26px; margin-bottom: 12px;">Ready to Upgrade?</h2>
-                <p style="color: var(--text-muted); margin-bottom: 24px;">Start your premium journey today and unlock your full potential!</p>
+                <h2 style="font-size: 24px; margin-bottom: 12px;">Ready to Upgrade?</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Start your premium journey today and unlock your full potential!</p>
                 <a href="https://wa.me/94764720488" class="btn btn-primary btn-lg"><i class="fab fa-whatsapp"></i> Contact Us</a>
             </div>
 
@@ -280,6 +249,7 @@
             { name: 'Sapumal Gamage', avatar: 'https://i.postimg.cc/SRDVg6rm/AIRetouch-20260412-140552262.png', text: 'Premium membership gives me access to everything I need to succeed.', isPremium: true }
         ];
 
+        // Render features
         function renderFeatures() {
             const left = document.getElementById('features-left');
             const right = document.getElementById('features-right');
@@ -297,6 +267,7 @@
                 </div>`).join('');
         }
 
+        // Render testimonials
         function renderTestimonials() {
             const grid = document.getElementById('testimonials-grid');
             if (!grid) return;
@@ -314,6 +285,7 @@
                 </div>`).join('');
         }
 
+        // Auto-scroll features (Desktop only for better UX)
         function autoScrollFeatures() {
             if (window.innerWidth > 768) {
                 const l = document.getElementById('features-left'), r = document.getElementById('features-right');
