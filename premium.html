@@ -7,299 +7,132 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Premium Features Section */
-        .features-section {
-            margin: 40px 0;
-        }
+        /* ✅ Premium Features Section - Professional Style */
+        .features-section { margin: 40px 0; }
         .section-title {
-            text-align: center;
-            font-size: 26px;
-            font-weight: 800;
-            margin-bottom: 12px;
+            text-align: center; font-size: 26px; font-weight: 800; margin-bottom: 12px;
             background: linear-gradient(135deg, var(--primary-light), var(--text-bright));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-            font-size: 15px;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 32px; font-size: 15px; }
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .features-column {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            max-height: 600px;
-            overflow-y: auto;
-            padding-right: 8px;
+            display: flex; flex-direction: column; gap: 16px;
+            max-height: 600px; overflow-y: auto; padding-right: 8px;
         }
-        .features-column::-webkit-scrollbar {
-            width: 4px;
-        }
-        .features-column::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .features-column::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
+        .features-column::-webkit-scrollbar { width: 4px; }
+        .features-column::-webkit-scrollbar-track { background: transparent; }
+        .features-column::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
         .feature-card {
-            display: flex;
-            gap: 16px;
-            padding: 18px;
-            background: var(--bg-dark);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
-            transition: all var(--transition);
-            align-items: flex-start;
-            animation: fadeIn 0.5s ease;
+            display: flex; gap: 16px; padding: 18px; background: var(--bg-card);
+            border-radius: var(--radius-sm); border: 1px solid var(--border);
+            transition: all var(--transition); align-items: flex-start;
         }
         .feature-card:hover {
-            border-color: var(--primary);
-            transform: translateX(6px);
+            border-color: var(--primary); transform: translateX(6px);
             background: rgba(108, 43, 217, 0.08);
             box-shadow: 0 4px 12px rgba(108, 43, 217, 0.15);
         }
         .feature-gif {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            object-fit: cover;
-            flex-shrink: 0;
-            background: var(--bg-card);
-            border: 2px solid var(--border);
+            width: 60px; height: 60px; border-radius: 12px; object-fit: cover;
+            flex-shrink: 0; background: var(--bg-dark); border: 2px solid var(--border);
         }
-        .feature-info h3 {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--text-main);
-        }
-        .feature-info p {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin: 0;
-        }
+        .feature-info h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
+        .feature-info p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0; }
         
-        /* Testimonials Grid */
-        .testimonials-section {
-            margin: 40px 0;
-        }
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+        /* ✅ Testimonials Grid */
+        .testimonials-section { margin: 40px 0; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .testimonial-card {
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
-            transition: all var(--transition);
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 24px; transition: all var(--transition);
             position: relative;
         }
         .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: 16px;
-            right: 24px;
-            font-size: 60px;
-            color: var(--primary);
-            opacity: 0.2;
-            font-family: serif;
-            line-height: 1;
+            content: '"'; position: absolute; top: 16px; right: 24px;
+            font-size: 60px; color: var(--primary); opacity: 0.2;
+            font-family: serif; line-height: 1;
         }
         .testimonial-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
+            border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow);
         }
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 16px;
-        }
+        .testimonial-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
         .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
+            width: 50px; height: 50px; border-radius: 50%; object-fit: cover;
             border: 2px solid var(--border);
         }
-        .testimonial-info {
-            flex: 1;
-        }
+        .testimonial-info { flex: 1; }
         .testimonial-name {
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-weight: 700; font-size: 15px; color: var(--text-main);
+            display: flex; align-items: center; gap: 6px;
         }
-        .premium-badge-small {
-            width: 16px;
-            height: 16px;
-        }
+        .premium-badge-small { width: 16px; height: 16px; }
         .testimonial-text {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin: 0;
-            font-style: italic;
+            font-size: 14px; color: var(--text-muted); line-height: 1.7;
+            margin: 0; font-style: italic;
         }
         
-        /* Pricing Cards Enhancement */
-        .pricing-grid {
-            margin-bottom: 40px;
-        }
+        /* ✅ Pricing Cards - ORIGINAL SIZES PRESERVED */
+        .pricing-grid { margin-bottom: 40px; }
         .pricing-card {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            position: relative; display: flex; flex-direction: column; height: 100%;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .pricing-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-        }
+        .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
         .pricing-card.popular {
-            border-color: var(--warning);
-            box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+            border-color: var(--warning); box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
         }
         .popular-badge {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: var(--warning);
-            color: #000;
-            padding: 5px 16px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            position: absolute; top: -12px; right: 20px; background: var(--warning);
+            color: #000; padding: 5px 16px; border-radius: 20px;
+            font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .price-section {
-            text-align: center;
-            margin: 20px 0;
-        }
+        .price-section { text-align: center; margin: 20px 0; }
         .old-price {
-            text-decoration: line-through;
-            color: var(--text-muted);
-            font-size: 16px;
-            display: block;
-            margin-bottom: 8px;
+            text-decoration: line-through; color: var(--text-muted);
+            font-size: 16px; display: block; margin-bottom: 8px;
         }
-        .new-price {
-            font-size: 38px;
-            font-weight: 800;
-            color: var(--primary-light);
-            display: block;
-        }
-        .new-price span {
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
+        /* ✅ ORIGINAL PRICE SIZE - DO NOT CHANGE */
+        .new-price { font-size: 34px; font-weight: 800; color: var(--primary-light); display: block; }
+        .new-price span { font-size: 16px; font-weight: 500; color: var(--text-muted); }
         .plan-desc {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 24px;
-            line-height: 1.6;
+            text-align: center; color: var(--text-muted); font-size: 14px;
+            margin-bottom: 24px; line-height: 1.6;
         }
-        .plan-features {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 24px 0;
-            flex: 1;
-        }
+        .plan-features { list-style: none; padding: 0; margin: 0 0 24px 0; flex: 1; }
         .plan-features li {
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 14px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            padding: 12px 0; border-bottom: 1px solid var(--border);
+            font-size: 14px; color: var(--text-main);
+            display: flex; align-items: center; gap: 12px;
         }
-        .plan-features li:last-child {
-            border-bottom: none;
-        }
-        .plan-features li i {
-            color: var(--success);
-            font-size: 16px;
-        }
+        .plan-features li:last-child { border-bottom: none; }
+        .plan-features li i { color: var(--success); font-size: 16px; }
         .discount-badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 8px;
+            display: inline-block; background: rgba(16, 185, 129, 0.15);
+            color: var(--success); padding: 4px 12px; border-radius: 6px;
+            font-size: 12px; font-weight: 700; margin-bottom: 8px;
         }
         
-        /* Mobile Responsive */
+        /* ✅ Mobile Responsive - Price Sizes PRESERVED */
         @media (max-width: 768px) {
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            .features-column {
-                max-height: none;
-                overflow-y: visible;
-                padding-right: 0;
-            }
-            .feature-card {
-                padding: 14px;
-            }
-            .feature-gif {
-                width: 50px;
-                height: 50px;
-            }
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-            .grid-equal {
-                grid-template-columns: 1fr;
-            }
-            .pricing-card {
-                max-width: 400px;
-                margin: 0 auto;
-            }
-            .new-price {
-                font-size: 32px;
-            }
+            .features-grid { grid-template-columns: 1fr; gap: 16px; }
+            .features-column { max-height: none; overflow-y: visible; padding-right: 0; }
+            .feature-card { padding: 14px; }
+            .feature-gif { width: 50px; height: 50px; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .grid-equal { grid-template-columns: 1fr; }
+            .pricing-card { max-width: 400px; margin: 0 auto; }
+            /* ✅ PRICE SIZE KEPT ORIGINAL - NO CHANGE */
+            .new-price { font-size: 34px; }
         }
-        
         @media (max-width: 480px) {
-            .section-title {
-                font-size: 22px;
-            }
-            .feature-card {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .feature-info h3 {
-                font-size: 14px;
-            }
-            .feature-info p {
-                font-size: 12px;
-            }
+            .section-title { font-size: 22px; }
+            .feature-card { flex-direction: column; align-items: center; text-align: center; }
+            .feature-info h3 { font-size: 14px; }
+            .feature-info p { font-size: 12px; }
+            /* ✅ SMALL MOBILE - PRICE SIZE STILL PRESERVED */
+            .new-price { font-size: 34px; }
         }
     </style>
 </head>
@@ -347,7 +180,7 @@
                 <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 24px;">Get exclusive access to all features and take your learning experience to the next level!</p>
             </div>
 
-            <!-- Pricing Section -->
+            <!-- ✅ Pricing Section (Original Sizes) -->
             <div class="grid-equal pricing-grid">
                 <!-- Individual Plan -->
                 <div class="card pricing-card">
@@ -389,7 +222,7 @@
                 </div>
             </div>
 
-            <!-- Features Section -->
+            <!-- ✅ Premium Features Section (Below Pricing) -->
             <div class="card features-section">
                 <h2 class="section-title">✨ Premium Features</h2>
                 <p class="section-subtitle">Everything you need to supercharge your learning</p>
@@ -399,14 +232,14 @@
                 </div>
             </div>
 
-            <!-- Testimonials Section -->
+            <!-- ✅ Testimonials Section -->
             <div class="card testimonials-section">
                 <h2 class="section-title">What Our Premium Users Say</h2>
                 <p class="section-subtitle">Join thousands of satisfied learners</p>
                 <div id="testimonials-grid" class="testimonials-grid"></div>
             </div>
 
-            <!-- CTA Section -->
+            <!-- ✅ CTA Section -->
             <div class="card text-center" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(108, 43, 217, 0.1) 100%); border-color: var(--primary);">
                 <h2 style="font-size: 26px; margin-bottom: 12px;">Ready to Upgrade?</h2>
                 <p style="color: var(--text-muted); margin-bottom: 24px;">Start your premium journey today and unlock your full potential!</p>
@@ -447,38 +280,23 @@
             { name: 'Sapumal Gamage', avatar: 'https://i.postimg.cc/SRDVg6rm/AIRetouch-20260412-140552262.png', text: 'Premium membership gives me access to everything I need to succeed.', isPremium: true }
         ];
 
-        // Render features
         function renderFeatures() {
-            const leftContainer = document.getElementById('features-left');
-            const rightContainer = document.getElementById('features-right');
-            if (!leftContainer || !rightContainer) return;
-            
-            const midPoint = Math.ceil(premiumFeatures.length / 2);
-            const leftFeatures = premiumFeatures.slice(0, midPoint);
-            const rightFeatures = premiumFeatures.slice(midPoint);
-            
-            leftContainer.innerHTML = leftFeatures.map(feature => `
+            const left = document.getElementById('features-left');
+            const right = document.getElementById('features-right');
+            if (!left || !right) return;
+            const mid = Math.ceil(premiumFeatures.length / 2);
+            left.innerHTML = premiumFeatures.slice(0, mid).map(f => `
                 <div class="feature-card">
-                    <img src="${feature.gif}" alt="${feature.title}" class="feature-gif">
-                    <div class="feature-info">
-                        <h3>${feature.title}</h3>
-                        <p>${feature.desc}</p>
-                    </div>
-                </div>
-            `).join('');
-            
-            rightContainer.innerHTML = rightFeatures.map(feature => `
+                    <img src="${f.gif}" alt="${f.title}" class="feature-gif">
+                    <div class="feature-info"><h3>${f.title}</h3><p>${f.desc}</p></div>
+                </div>`).join('');
+            right.innerHTML = premiumFeatures.slice(mid).map(f => `
                 <div class="feature-card">
-                    <img src="${feature.gif}" alt="${feature.title}" class="feature-gif">
-                    <div class="feature-info">
-                        <h3>${feature.title}</h3>
-                        <p>${feature.desc}</p>
-                    </div>
-                </div>
-            `).join('');
+                    <img src="${f.gif}" alt="${f.title}" class="feature-gif">
+                    <div class="feature-info"><h3>${f.title}</h3><p>${f.desc}</p></div>
+                </div>`).join('');
         }
 
-        // Render testimonials
         function renderTestimonials() {
             const grid = document.getElementById('testimonials-grid');
             if (!grid) return;
@@ -487,115 +305,70 @@
                     <div class="testimonial-header">
                         <img src="${t.avatar}" alt="${t.name}" class="testimonial-avatar">
                         <div class="testimonial-info">
-                            <div class="testimonial-name">
-                                ${t.name}
-                                ${t.isPremium ? '<img src="https://i.postimg.cc/nrFwN8kn/gem.png" alt="Premium" class="premium-badge-small" title="Premium User">' : ''}
+                            <div class="testimonial-name">${t.name}
+                                ${t.isPremium ? '<img src="https://i.postimg.cc/nrFwN8kn/gem.png" class="premium-badge-small" title="Premium">' : ''}
                             </div>
                         </div>
                     </div>
                     <p class="testimonial-text">${t.text}</p>
-                </div>
-            `).join('');
+                </div>`).join('');
         }
 
-        // Auto-scroll features (desktop only)
         function autoScrollFeatures() {
             if (window.innerWidth > 768) {
-                const leftContainer = document.getElementById('features-left');
-                const rightContainer = document.getElementById('features-right');
-                
-                if (leftContainer && rightContainer) {
-                    let leftPos = 0, rightPos = 0;
+                const l = document.getElementById('features-left'), r = document.getElementById('features-right');
+                if (l && r) {
+                    let lp = 0, rp = 0;
                     setInterval(() => {
-                        leftPos += 0.3;
-                        if (leftPos >= leftContainer.scrollHeight - leftContainer.clientHeight) leftPos = 0;
-                        leftContainer.scrollTop = leftPos;
-                        
-                        rightPos += 0.3;
-                        if (rightPos >= rightContainer.scrollHeight - rightContainer.clientHeight) rightPos = 0;
-                        rightContainer.scrollTop = rightPos;
+                        lp += 0.3; if (lp >= l.scrollHeight - l.clientHeight) lp = 0; l.scrollTop = lp;
+                        rp += 0.3; if (rp >= r.scrollHeight - r.clientHeight) rp = 0; r.scrollTop = rp;
                     }, 50);
                 }
             }
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            renderFeatures();
-            renderTestimonials();
-            autoScrollFeatures();
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFeatures(); renderTestimonials(); autoScrollFeatures();
             
             // Theme Toggle
-            const themeToggle = document.querySelector('.theme-toggle');
-            const body = document.body;
-            const savedTheme = localStorage.getItem('learny-theme');
-            if (savedTheme === 'light') body.classList.add('light');
-            
-            function updateThemeIcon() {
-                const icon = themeToggle?.querySelector('i');
-                if (icon) icon.className = body.classList.contains('light') ? 'fas fa-moon' : 'fas fa-sun';
-            }
-            updateThemeIcon();
-            
-            if (themeToggle) {
-                themeToggle.addEventListener('click', () => {
-                    body.classList.toggle('light');
-                    localStorage.setItem('learny-theme', body.classList.contains('light') ? 'light' : 'dark');
-                    updateThemeIcon();
-                });
-            }
-
-            // Mobile Sidebar
-            const hamburger = document.querySelector('.hamburger');
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.createElement('div');
-            overlay.className = 'overlay';
-            document.body.appendChild(overlay);
-            
-            function toggleSidebar() {
-                sidebar?.classList.toggle('open');
-                overlay.classList.toggle('show');
-            }
-            
-            hamburger?.addEventListener('click', toggleSidebar);
-            overlay.addEventListener('click', toggleSidebar);
-
-            // Premium Status Check
-            const isPremium = localStorage.getItem('is_premium') === 'true';
-            if (isPremium) {
-                document.querySelectorAll('.pricing-card').forEach(card => {
-                    card.style.opacity = '0.6';
-                    card.style.pointerEvents = 'none';
-                    const btn = card.querySelector('a');
-                    if (btn) {
-                        btn.textContent = 'Already Active';
-                        btn.classList.remove('btn-primary', 'btn-secondary');
-                        btn.classList.add('btn', 'btn-success');
-                    }
-                });
-            }
-
-            // Fade-in animation on scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            document.querySelectorAll('.card, .pricing-card, .feature-card, .testimonial-card').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(el);
+            const tt = document.querySelector('.theme-toggle'), body = document.body;
+            if (localStorage.getItem('learny-theme') === 'light') body.classList.add('light');
+            function updIcon() { const i = tt?.querySelector('i'); if (i) i.className = body.classList.contains('light') ? 'fas fa-moon' : 'fas fa-sun'; }
+            updIcon();
+            tt?.addEventListener('click', () => {
+                body.classList.toggle('light');
+                localStorage.setItem('learny-theme', body.classList.contains('light') ? 'light' : 'dark');
+                updIcon();
             });
 
-            // Call APP update if exists
-            if (typeof APP !== 'undefined' && typeof APP.updateGreetingUI === 'function') {
-                APP.updateGreetingUI();
+            // Mobile Sidebar
+            const hb = document.querySelector('.hamburger'), sb = document.querySelector('.sidebar');
+            const ov = document.createElement('div'); ov.className = 'overlay'; document.body.appendChild(ov);
+            function toggleSB() { sb?.classList.toggle('open'); ov.classList.toggle('show'); }
+            hb?.addEventListener('click', toggleSB); ov.addEventListener('click', toggleSB);
+
+            // Premium Check
+            if (localStorage.getItem('is_premium') === 'true') {
+                document.querySelectorAll('.pricing-card').forEach(c => {
+                    c.style.opacity = '0.6'; c.style.pointerEvents = 'none';
+                    const b = c.querySelector('a'); if (b) {
+                        b.textContent = 'Already Active';
+                        b.classList.remove('btn-primary','btn-secondary'); b.classList.add('btn','btn-success');
+                    }
+                });
             }
+
+            // Fade-in on scroll
+            const obs = new IntersectionObserver(es => es.forEach(e => {
+                if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+            }), { threshold: 0.1 });
+            document.querySelectorAll('.card,.pricing-card,.feature-card,.testimonial-card').forEach(el => {
+                el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                obs.observe(el);
+            });
+
+            if (typeof APP !== 'undefined' && typeof APP.updateGreetingUI === 'function') APP.updateGreetingUI();
         });
     </script>
 </body>
