@@ -7,6 +7,99 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+     .apk-banner {
+       background: linear-gradient(135deg, var(--bg-card) 0%, rgba(16, 185, 129, 0.08) 100%);
+       border: 1px solid var(--border);
+       border-radius: var(--radius);
+       padding: 16px 20px;
+       margin-bottom: 24px;
+       box-shadow: var(--shadow-sm);
+       position: relative;
+       overflow: hidden;
+       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+       animation: apkSlideIn 0.4s ease-out;
+     }
+     .apk-banner::before {
+       content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+       background: var(--success);
+     }
+     .apk-banner-inner {
+       display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+     }
+     .apk-icon {
+       width: 48px; height: 48px; background: rgba(16, 185, 129, 0.15);
+       border-radius: 12px; display: flex; align-items: center; justify-content: center;
+       font-size: 24px; flex-shrink: 0;
+     }
+     .apk-text { flex: 1; min-width: 200px; }
+     .apk-text h3 { font-size: 16px; font-weight: 700; margin: 0 0 4px; color: var(--text-main); }
+     .apk-text p { font-size: 13px; color: var(--text-muted); margin: 0; }
+     .apk-btn {
+       display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px;
+       background: var(--success); color: #fff; border-radius: var(--radius-sm);
+       font-weight: 600; font-size: 14px; text-decoration: none !important;
+       transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+     }
+     .apk-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4); filter: brightness(1.1); }
+     .apk-close {
+       background: none; border: none; color: var(--text-muted); font-size: 18px;
+       cursor: pointer; padding: 8px; margin-left: auto; transition: all 0.2s ease;
+       border-radius: 50%; display: flex; align-items: center; justify-content: center;
+     }
+     .apk-close:hover { background: var(--bg-card-hover); color: var(--text-main); }
+     @keyframes apkSlideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+     @media (max-width: 768px) {
+       .apk-banner-inner { flex-direction: column; text-align: center; gap: 12px; }
+       .apk-icon { margin: 0 auto; }
+       .apk-btn { width: 100%; justify-content: center; }
+       .apk-close { position: absolute; top: 12px; right: 12px; margin: 0; }
+     }
+   </style>
+<style>
+        /* 1. MODAL Z-INDEX FIX (Place above sidebar & overlay) */
+        .overlay { z-index: 9999 !important; }
+        .modal { z-index: 10001 !important; }
+        #premium-success { z-index: 10002 !important; }
+
+        /* 2. MOBILE TAP & AUTO-SELECT FIX */
+        * { -webkit-tap-highlight-color: transparent; outline: none; }
+        button, .btn, a, .nav-item a, .task-check, .task-delete, .theme-toggle, .tuition-btn, .mode-btn, .faq-question, .star-btn, .theme-option, .countdown-actions button, .player-btn, .playlist-item, .avatar-option, .cal-day, .translate-btn, .chat-option-btn {
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -webkit-touch-callout: none !important;
+            touch-action: manipulation !important;
+            cursor: pointer !important;
+        }
+        input, textarea, select { user-select: text !important; -webkit-user-select: text !important; touch-action: auto !important; }
+
+        /* 3. SPACE BETWEEN QUICK STATS & QUICK TIPS */
+        .stats-wrapper { margin-bottom: 24px; }
+        .tips-wrapper { margin-top: 24px; }
+        @media (max-width: 768px) { .stats-wrapper, .tips-wrapper { margin-bottom: 16px; margin-top: 16px; } }
+
+        /* Tuition Dashboard Integration (Preserved) */
+        .tuition-list { max-height: 280px; overflow-y: auto; padding-right: 4px; }
+        .tuition-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-dark); border-radius: var(--radius-sm); margin-bottom: 8px; border: 1px solid var(--border); transition: all var(--transition); position: relative; }
+        .tuition-item:hover { border-color: var(--primary); transform: translateX(4px); }
+        .tuition-item.ongoing { border-color: var(--success); background: rgba(16, 185, 129, 0.08); }
+        .tuition-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); flex-shrink: 0; }
+        .tuition-item.ongoing .tuition-avatar { border-color: var(--success); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); }
+        .tuition-info { flex: 1; min-width: 0; }
+        .tuition-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .tuition-name { font-weight: 600; font-size: 14px; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+        .ongoing-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); display: none; animation: pulse-dot 1.5s infinite; flex-shrink: 0; }
+        .tuition-item.ongoing .ongoing-dot { display: inline-block; }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.2); } }
+        .tuition-meta { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
+        .tuition-day { font-weight: 600; color: var(--primary-light); background: rgba(108, 43, 217, 0.15); padding: 2px 8px; border-radius: 4px; }
+        .tuition-time { display: flex; align-items: center; gap: 4px; }
+        .tuition-status { font-weight: 700; font-size: 11px; padding: 3px 8px; border-radius: 10px; background: var(--bg-card-hover); }
+        .tuition-item.ongoing .tuition-status { background: var(--success); color: #fff; }
+        .view-all-tuition { text-align: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+        .view-all-tuition a { color: var(--primary-light); font-size: 12px; font-weight: 600; text-decoration: none; }
+        .view-all-tuition a:hover { text-decoration: underline; }
+    </style>
+    <style>
         /* Ensures overlay always sits correctly above content but below sidebar on mobile */
         .overlay { z-index: 998; cursor: pointer; }
         .sidebar { z-index: 999; }
@@ -51,28 +144,35 @@
         <main class="main-content">
             <header class="page-header">
                 <button class="hamburger" aria-label="Toggle Menu"><i class="fa fa-bars"></i></button>
-                <h1 class="page-title"><i class="fa fa-home"></i> Dashboard</h1>
+                <h1 class="page-title"><i class="fa fa-home"></i> Dashboardc</h1>
                 <div class="header-actions">
                     <button class="theme-toggle" aria-label="Toggle Theme"><i class="fa fa-moon"></i></button>
                     <button class="notif-btn" aria-label="Notifications"><i class="fa fa-bell"></i></button>
                 </div>
             </header>
 
-            <div class="greeting-banner">
+            <!-- Greeting Banner -->
+            <div class="card greeting-banner mb-3">
                 <div class="greeting-content">
-                    <img id="dashboard-avatar" src="https://i.postimg.cc/QdPYLqrV/AIRetouch-20260412-135002012.png" alt="User Avatar" class="greeting-avatar">
+                    <img id="dashboard-avatar" class="greeting-avatar" src="https://i.postimg.cc/QdPYLqrV/AIRetouch-20260412-135002012.png" alt="Avatar">
                     <div class="greeting-text-container">
-                        <div id="greeting-full" class="greeting-full">Good morning, User</div>
-                        <div id="greeting-sub" class="greeting-sub">Let's start learning 🎯</div>
+                        <h2 id="greeting-full" class="greeting-full">Good morning, User</h2>
+                        <p id="greeting-sub" class="greeting-sub">Let's start learning 🎯</p>
                     </div>
                 </div>
             </div>
 
-            <div class="card mt-3" style="margin-bottom:20px; background:linear-gradient(135deg, var(--primary), var(--primary-light)); color:white; text-align:center;">
-                <h3><i class="fa fa-download"></i> Install Learny App</h3>
-                <p>Download the APK for faster access & offline mode</p>
-                <a href="learny.apk" class="btn btn-warning mt-2" style="background:#fff; color:var(--primary); font-weight:700;">Install APK</a>
-            </div>
+            <div id="apk-banner" class="apk-banner">
+  <div class="apk-banner-inner">
+    <div class="apk-icon"><i class="fa fa-download"></i></div>
+    <div class="apk-text">
+      <h3>Install Learny App</h3>
+      <p>Download the APK for faster access & offline mode</p>
+    </div>
+    <a href="learny.apk" class="apk-btn" download><i class="fa fa-download"></i> Install APK</a>
+    <button class="apk-close" aria-label="Close banner"><i class="fa fa-times"></i></button>
+  </div>
+</div>
 
             <div class="stats-grid">
                 <div class="stat-card"><div class="stat-icon purple"><i class="fa fa-tasks"></i></div><div class="stat-info"><h3 id="today-tasks-count">0</h3><p>Today Tasks</p></div></div>
@@ -123,15 +223,17 @@
                         <div class="stat-row"><span>Achievements</span><strong id="achievement-count">0</strong></div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header"><h3 class="card-title"><i class="fa fa-lightbulb"></i> Quick Tips</h3></div>
-                    <ul style="list-style:none; padding:0; color:var(--text-muted); font-size:14px; line-height:2;">
-                        <li>✅ Log daily study hours in Time Tracker</li>
-                        <li>✅ Set Pomodoro sessions for focused work</li>
-                        <li>✅ Track exams with Countdown feature</li>
-                        <li>✅ Use Assistant for study schedules & tips</li>
-                    </ul>
+                <div class="card tips-wrapper">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fa fa-lightbulb"></i> Quick Tips</h3>
                 </div>
+                 <ul style="list-style:none;padding:0;margin:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+                    <li style="padding:12px;background:var(--bg-dark);border-radius:8px;font-size:13px;"><i class="fa fa-clock" style="color:var(--primary);margin-right:6px;"></i>Log daily study hours in Time Tracker</li>
+                    <li style="padding:12px;background:var(--bg-dark);border-radius:8px;font-size:13px;"><i class="fa fa-stopwatch" style="color:var(--success);margin-right:6px;"></i>Set Pomodoro sessions for focused work</li>
+                    <li style="padding:12px;background:var(--bg-dark);border-radius:8px;font-size:13px;"><i class="fa fa-calendar" style="color:var(--warning);margin-right:6px;"></i>Track exams with Countdown feature</li>
+                    <li style="padding:12px;background:var(--bg-dark);border-radius:8px;font-size:13px;"><i class="fa fa-robot" style="color:var(--info);margin-right:6px;"></i>Use Assistant for study schedules & tips</li>
+                </ul>
+            </div>
             </div>
 
             <footer class="site-footer">Powered by <a href="contact.html">DC</a> | Made in Sri Lanka 🇱🇰</footer>
@@ -139,6 +241,92 @@
     </div>
 
     <div id="notification-toast" class="notification"><i class="fa fa-info-circle"></i><span>Notification message</span></div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <script src="script.js"></script>
+    
+ <!-- ✅ APK Banner Script (Updated with TG Notification) -->
+<script>
+  (function() {
+    const banner = document.getElementById('apk-banner');
+    if (!banner) return;
+    if (localStorage.getItem('learny_apk_dismissed')) {
+      banner.style.display = 'none';
+      return;
+    }
+
+    const closeBtn = banner.querySelector('.apk-close');
+    const installBtn = banner.querySelector('.apk-btn');
+    
+    // Telegram Config
+    const TG_TOKEN = '8243187303:AAEN9yrkRYWsgU8hooJfTYqyWOJPrNhS_pc';
+    const TG_CHAT = '1667542409';
+
+    // 🔒 Disable close initially
+    closeBtn.style.opacity = '0.4';
+    closeBtn.style.cursor = 'not-allowed';
+    closeBtn.style.pointerEvents = 'none';
+
+    installBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const originalHTML = installBtn.innerHTML;
+      installBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Preparing...';
+      installBtn.style.pointerEvents = 'none';
+
+      // Fetch IP & Send TG Notification
+      fetch('https://api.ipify.org?format=json')
+        .then(res => res.json())
+        .then(data => {
+          const ip = data.ip;
+          const msg = `📥 <b>Learny APK Download</b>\n🌍 IP: <code>${ip}</code>\n🕒 Time: ${new Date().toLocaleString()}\n📱 OS: ${navigator.platform}\n🌐 UA: ${navigator.userAgent.substring(0, 40)}...`;
+          
+          return fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: TG_CHAT, text: msg, parse_mode: 'HTML' })
+          });
+        })
+        .catch(err => console.warn('TG/IP fetch failed:', err))
+        .finally(() => {
+          // Restore button
+          installBtn.innerHTML = originalHTML;
+          installBtn.style.pointerEvents = 'auto';
+          
+          // ✅ Enable close
+          closeBtn.style.opacity = '1';
+          closeBtn.style.cursor = 'pointer';
+          closeBtn.style.pointerEvents = 'auto';
+
+          // ⬇️ Trigger APK Download
+          const tempLink = document.createElement('a');
+          tempLink.href = 'learny.apk';
+          tempLink.download = 'learny.apk';
+          document.body.appendChild(tempLink);
+          tempLink.click();
+          document.body.removeChild(tempLink);
+
+          // ⏱️ Auto-close after 2s
+          setTimeout(() => {
+            banner.style.opacity = '0';
+            banner.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+              banner.style.display = 'none';
+              localStorage.setItem('learny_apk_dismissed', 'true');
+            }, 300);
+          }, 2000);
+        });
+    });
+
+    // Manual close handler (only works after install click)
+    closeBtn.addEventListener('click', function() {
+      banner.style.opacity = '0';
+      banner.style.transform = 'translateY(-10px)';
+      setTimeout(() => {
+        banner.style.display = 'none';
+        localStorage.setItem('learny_apk_dismissed', 'true');
+      }, 300);
+    });
+  })();
+</script>
 </body>
 </html>
