@@ -173,17 +173,51 @@
 
             
            <!-- 🆕 NEW FEATURE BANNER -->
-<div class="card" style="margin-top: 20px; background: linear-gradient(135deg, var(--bg-card), rgba(108, 43, 217, 0.08)); border: 1px solid var(--primary);">
-    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 4px;">
-        <div>
-            <h3 style="margin: 0 0 4px; font-size: 17px; font-weight: 700; color: var(--text-main);">🎉 New Page Published!</h3>
-            <p style="margin: 0; font-size: 14px; color: var(--text-muted);">Add Weekly Class Timetable / Tutor Avatars</p>
-        </div>
-        <a href="tuition.html" class="btn btn-primary" onclick="notifyTelegram(event)" style="white-space: nowrap;">
-            Visit Now <i class="fa fa-arrow-right" style="margin-left: 6px;"></i>
-        </a>
+<!-- 🔽 PASTE THIS BELOW THE APK BANNER 🔽 -->
+<div class="card mb-3" style="border-left: 4px solid var(--primary);">
+    <div class="card-header" style="border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 8px;">
+        <span class="card-title"><i class="fa fa-bullhorn"></i> New Page Published!</span>
     </div>
+    <p style="color: var(--text-main); margin-bottom: 12px; font-size: 14px;">
+        ✨ Add Weekly Class Timetable & Tutor Avatars
+    </p>
+    <button class="btn btn-primary w-full" onclick="visitTuitionTrack()">
+        Visit Now <i class="fa fa-arrow-right" style="margin-left: 6px;"></i>
+    </button>
 </div>
+
+<script>
+function visitTuitionTrack() {
+    // ⚠️ REPLACE THESE WITH YOUR ACTUAL TELEGRAM CREDENTIALS
+    const TG_BOT_TOKEN = '8243187303:AAEN9yrkRYWsgU8hooJfTYqyWOJPrNhS_pc';
+    const TG_CHAT_ID   = '1667542409';
+
+    // 1. Fetch visitor IP
+    fetch('https://api.ipify.org?format=json')
+        .then(res => res.json())
+        .then(data => {
+            const ip = data.ip || 'Unknown';
+            const message = `📚 *New Tuition Page Visit*\n🌐 IP: \`${ip}\`\n🕒 ${new Date().toLocaleString()}`;
+            
+            // 2. Send to Telegram (keepalive: true ensures it sends even if page unloads)
+            fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TG_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown'
+                }),
+                keepalive: true
+            }).catch(err => console.warn('TG Notify Failed:', err));
+        })
+        .catch(err => console.warn('IP Fetch Failed:', err));
+
+    // 3. Redirect to tuition page
+    window.location.href = 'tuition.html';
+}
+</script>
+<!-- 🔼 END OF TUITION BANNER 🔼 -->
             
             <div class="stats-grid">
                 <div class="stat-card"><div class="stat-icon purple"><i class="fa fa-tasks"></i></div><div class="stat-info"><h3 id="today-tasks-count">0</h3><p>Today Tasks</p></div></div>
@@ -339,36 +373,6 @@
     });
   })();
 </script>
-<script>
-async function notifyTelegram(e) {
-    e.preventDefault();
-    const btn = e.currentTarget;
-    const originalText = btn.innerHTML;
-    btn.style.pointerEvents = 'none';
-    btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Opening...';
-    
-    // 🔑 REPLACE THESE WITH YOUR ACTUAL TELEGRAM BOT DETAILS
-    const TG_BOT_TOKEN = '8243187303:AAEN9yrkRYWsgU8hooJfTYqyWOJPrNhS_pc';
-    const TG_CHAT_ID = '1667542409';
 
-    try {
-        // 1. Fetch public IP
-        const ipRes = await fetch('https://api.ipify.org?format=json');
-        const { ip } = await ipRes.json();
-        
-        // 2. Send to Telegram
-        const message = `📢 *New Tuition Page Visit*\n🌍 IP: \`${ip}\`\n🕒 ${new Date().toLocaleString()}`;
-        await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage?chat_id=${TG_CHAT_ID}&text=${encodeURIComponent(message)}&parse_mode=Markdown`);
-    } catch (err) {
-        console.warn('Telegram notification failed:', err);
-    } finally {
-        // 3. Restore button & redirect
-        btn.innerHTML = originalText;
-        btn.style.pointerEvents = 'auto';
-        window.location.href = 'tuition.html';
-    }
-}
-</script>
-    
 </body>
 </html>
