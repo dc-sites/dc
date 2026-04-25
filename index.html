@@ -141,7 +141,7 @@
         <main class="main-content">
             <header class="page-header">
                 <button class="hamburger" aria-label="Toggle Menu"><i class="fa fa-bars"></i></button>
-                <h1 class="page-title"><i class="fa fa-tachometer"></i> Dashboardg</h1>
+                <h1 class="page-title"><i class="fa fa-tachometer"></i> Dashboard</h1>
                 <div class="header-actions">
                     <button class="theme-toggle" aria-label="Toggle Theme"><i class="fa fa-moon"></i></button>
                     <button class="notif-btn" aria-label="Notifications"><i class="fa fa-bell"></i></button>
@@ -172,7 +172,6 @@
 </div>
 
             
-           <!-- 🆕 NEW FEATURE BANNER -->
 <!-- 🔽 PASTE RIGHT AFTER APK BANNER 🔽 -->
 <div class="card mb-3" id="tuition-promo-banner">
     <div class="card-header">
@@ -181,39 +180,49 @@
     <p style="color: var(--text-main); margin-bottom: 12px; font-size: 14px;">
         Add Weekly Class Timetable & Tutor Avatars
     </p>
-    <button class="btn btn-primary w-full" onclick="trackAndVisitTuition()">
+    <button class="btn btn-primary w-full" onclick="handleTuitionVisit()">
         Visit Now <i class="fa fa-arrow-right" style="margin-left: 6px;"></i>
     </button>
 </div>
 
 <script>
-function trackAndVisitTuition() {
-    const TG_TOKEN = '8243187303:AAEN9yrkRYWsgU8hooJfTYqyWOJPrNhS_pc';
-    const TG_CHAT  = '1667542409';
-    const banner   = document.getElementById('tuition-promo-banner');
-    
-    // 1️⃣ Instantly hide banner for smooth UX
-    if (banner) banner.style.display = 'none';
+(function() {
+    const banner = document.getElementById('tuition-promo-banner');
+    if (!banner) return;
 
-    // 2️⃣ Fetch IP & Notify Telegram
-    fetch('https://api.ipify.org?format=json')
-        .then(res => res.json())
-        .then(data => {
-            const ip = data.ip || 'Unknown';
-            const msg = `📚 *Tuition Page Visit*\n🌐 IP: \`${ip}\`\n⏰ ${new Date().toLocaleString()}`;
-            return fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: TG_CHAT, text: msg, parse_mode: 'Markdown' }),
-                keepalive: true // ✅ Ensures message sends even during redirect
+    // 🔒 Check localStorage: if already clicked, hide forever on load
+    if (localStorage.getItem('tuition_banner_clicked') === 'true') {
+        banner.style.display = 'none';
+    }
+
+    window.handleTuitionVisit = function() {
+        // 1️⃣ Mark as clicked & hide instantly
+        localStorage.setItem('tuition_banner_clicked', 'true');
+        banner.style.display = 'none';
+
+        // 2️⃣ Fetch IP & Notify Telegram
+        const TG_TOKEN = '8243187303:AAEN9yrkRYWsgU8hooJfTYqyWOJPrNhS_pc';
+        const TG_CHAT  = '1667542409';
+
+        fetch('https://api.ipify.org?format=json')
+            .then(res => res.json())
+            .then(data => {
+                const ip = data.ip || 'Unknown';
+                const msg = `📚 *Tuition Page Visit*\n🌐 IP: \`${ip}\`\n⏰ ${new Date().toLocaleString()}`;
+                return fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ chat_id: TG_CHAT, text: msg, parse_mode: 'Markdown' }),
+                    keepalive: true // ✅ Guarantees delivery even during redirect
+                });
+            })
+            .catch(e => console.warn('Tracking skipped:', e))
+            .finally(() => {
+                // 3️⃣ Redirect to tuition page
+                window.location.href = 'tuition.html';
             });
-        })
-        .catch(e => console.warn('Tracking failed:', e))
-        .finally(() => {
-            // 3️⃣ Redirect to tuition page
-            window.location.href = 'tuition.html';
-        });
-}
+    };
+})();
 </script>
 <!-- 🔼 END TUITION BANNER 🔼 -->
             <div class="stats-grid">
