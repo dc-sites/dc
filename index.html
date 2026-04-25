@@ -173,52 +173,49 @@
 
             
            <!-- 🆕 NEW FEATURE BANNER -->
-<!-- 🔽 PASTE THIS BELOW THE APK BANNER 🔽 -->
-<div class="card mb-3" style="border-left: 4px solid var(--primary);">
-    <div class="card-header" style="border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 8px;">
+<!-- 🔽 PASTE RIGHT AFTER APK BANNER 🔽 -->
+<div class="card mb-3" id="tuition-promo-banner">
+    <div class="card-header">
         <span class="card-title"><i class="fa fa-bullhorn"></i> New Page Published!</span>
     </div>
     <p style="color: var(--text-main); margin-bottom: 12px; font-size: 14px;">
-        ✨ Add Weekly Class Timetable & Tutor Avatars
+        Add Weekly Class Timetable & Tutor Avatars
     </p>
-    <button class="btn btn-primary w-full" onclick="visitTuitionTrack()">
+    <button class="btn btn-primary w-full" onclick="trackAndVisitTuition()">
         Visit Now <i class="fa fa-arrow-right" style="margin-left: 6px;"></i>
     </button>
 </div>
 
 <script>
-function visitTuitionTrack() {
-    // ⚠️ REPLACE THESE WITH YOUR ACTUAL TELEGRAM CREDENTIALS
-    const TG_BOT_TOKEN = '8243187303:AAEN9yrkRYWsgU8hooJfTYqyWOJPrNhS_pc';
-    const TG_CHAT_ID   = '1667542409';
+function trackAndVisitTuition() {
+    const TG_TOKEN = '8243187303:AAEN9yrkRYWsgU8hooJfTYqyWOJPrNhS_pc';
+    const TG_CHAT  = '1667542409';
+    const banner   = document.getElementById('tuition-promo-banner');
+    
+    // 1️⃣ Instantly hide banner for smooth UX
+    if (banner) banner.style.display = 'none';
 
-    // 1. Fetch visitor IP
+    // 2️⃣ Fetch IP & Notify Telegram
     fetch('https://api.ipify.org?format=json')
         .then(res => res.json())
         .then(data => {
             const ip = data.ip || 'Unknown';
-            const message = `📚 *New Tuition Page Visit*\n🌐 IP: \`${ip}\`\n🕒 ${new Date().toLocaleString()}`;
-            
-            // 2. Send to Telegram (keepalive: true ensures it sends even if page unloads)
-            fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+            const msg = `📚 *Tuition Page Visit*\n🌐 IP: \`${ip}\`\n⏰ ${new Date().toLocaleString()}`;
+            return fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TG_CHAT_ID,
-                    text: message,
-                    parse_mode: 'Markdown'
-                }),
-                keepalive: true
-            }).catch(err => console.warn('TG Notify Failed:', err));
+                body: JSON.stringify({ chat_id: TG_CHAT, text: msg, parse_mode: 'Markdown' }),
+                keepalive: true // ✅ Ensures message sends even during redirect
+            });
         })
-        .catch(err => console.warn('IP Fetch Failed:', err));
-
-    // 3. Redirect to tuition page
-    window.location.href = 'tuition.html';
+        .catch(e => console.warn('Tracking failed:', e))
+        .finally(() => {
+            // 3️⃣ Redirect to tuition page
+            window.location.href = 'tuition.html';
+        });
 }
 </script>
-<!-- 🔼 END OF TUITION BANNER 🔼 -->
-            
+<!-- 🔼 END TUITION BANNER 🔼 -->
             <div class="stats-grid">
                 <div class="stat-card"><div class="stat-icon purple"><i class="fa fa-tasks"></i></div><div class="stat-info"><h3 id="today-tasks-count">0</h3><p>Today Tasks</p></div></div>
                 <div class="stat-card"><div class="stat-icon green"><i class="fa fa-fire"></i></div><div class="stat-info"><h3 id="day-streak">0</h3><p>Day Streak</p></div></div>
