@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ✅ PREMIUM PRICING & INTERACTIVE STYLES */
+        /* ✅ PRICING - ORIGINAL SIZES PRESERVED */
         .pricing-grid { margin-bottom: 40px; }
         .pricing-card { 
             position: relative; display: flex; flex-direction: column; height: 100%; 
@@ -24,7 +24,7 @@
         }
         .price-section { text-align: center; margin: 20px 0; }
         .old-price { text-decoration: line-through; color: var(--text-muted); font-size: 16px; display: block; margin-bottom: 8px; }
-        /* ✅ KEEP DESKTOP SIZE ON MOBILE */
+        /* ✅ KEEP DESKTOP SIZE ON MOBILE - 34px */
         .new-price { font-size: 34px; font-weight: 800; color: var(--primary-light); display: block; }
         .new-price span { font-size: 16px; font-weight: 500; color: var(--text-muted); }
         .plan-desc { text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
@@ -34,7 +34,7 @@
         .plan-features li i { color: var(--success); font-size: 16px; }
         .discount-badge { display: inline-block; background: rgba(16, 185, 129, 0.15); color: var(--success); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; margin-bottom: 8px; }
         
-        /* ✅ Premium Features Section */
+        /* ✅ Premium Features Section - Professional with GIFs */
         .features-section { margin: 40px 0; }
         .section-title {
             text-align: center; font-size: 26px; font-weight: 800; margin-bottom: 12px;
@@ -51,7 +51,7 @@
         .features-column::-webkit-scrollbar-track { background: transparent; }
         .features-column::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
         .feature-card {
-            display: flex; gap: 16px; padding: 18px; background: var(--bg-dark);
+            display: flex; gap: 16px; padding: 18px; background: var(--bg-card);
             border-radius: var(--radius-sm); border: 1px solid var(--border);
             transition: all var(--transition); align-items: flex-start;
         }
@@ -59,7 +59,7 @@
             border-color: var(--primary); transform: translateX(6px);
             background: rgba(108, 43, 217, 0.08); box-shadow: 0 4px 12px rgba(108, 43, 217, 0.15);
         }
-        .feature-gif { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; flex-shrink: 0; background: var(--bg-card); border: 2px solid var(--border); }
+        .feature-gif { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; flex-shrink: 0; background: var(--bg-dark); border: 2px solid var(--border); }
         .feature-info h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
         .feature-info p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0; }
         
@@ -67,7 +67,7 @@
         .testimonials-section { margin: 40px 0; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .testimonial-card {
-            background: var(--bg-dark); border: 1px solid var(--border);
+            background: var(--bg-card); border: 1px solid var(--border);
             border-radius: var(--radius); padding: 24px; transition: all var(--transition); position: relative;
         }
         .testimonial-card::before {
@@ -83,7 +83,7 @@
         .premium-badge-small { width: 16px; height: 16px; }
         .testimonial-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin: 0; font-style: italic; }
         
-        /* ✅ Mobile Responsive - Price Sizes PRESERVED */
+        /* ✅ Mobile Responsive - PRICE SIZES PRESERVED */
         @media (max-width: 768px) {
             .features-grid { grid-template-columns: 1fr; gap: 16px; }
             .features-column { max-height: none; overflow-y: visible; padding-right: 0; }
@@ -91,18 +91,17 @@
             .feature-gif { width: 50px; height: 50px; }
             .testimonials-grid { grid-template-columns: 1fr; }
             .grid-equal { grid-template-columns: 1fr; }
-            /* ✅ PRICE SIZE KEPT EXACTLY AS DESKTOP (34px) */
+            /* ✅ PRICE SIZE KEPT EXACTLY AS DESKTOP - 34px */
             .new-price { font-size: 34px !important; }
-            .pricing-card { max-width: 100%; margin: 0 auto; }
+            .pricing-card { max-width: 100%; margin: 0 auto; padding: 20px 16px; }
         }
         @media (max-width: 480px) {
             .section-title { font-size: 22px; }
             .feature-card { flex-direction: column; align-items: center; text-align: center; }
             .feature-info h3 { font-size: 14px; }
             .feature-info p { font-size: 12px; }
-            /* ✅ SMALL MOBILE - PRICE SIZE STILL PRESERVED */
+            /* ✅ SMALL MOBILE - PRICE SIZE STILL 34px */
             .new-price { font-size: 34px !important; }
-            .pricing-card { padding: 20px 16px; }
         }
     </style>
 </head>
@@ -136,7 +135,7 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="page-header">
-                <h1 class="page-title"><i class="fas fa-gem"></i> Premium</h1>
+                <h1 class="page-title"><i class="fas fa-gem"></i> Premiummm</h1>
                 <div class="header-actions">
                     <button class="hamburger"><i class="fas fa-bars"></i></button>
                     <button class="theme-toggle"><i class="fas fa-moon"></i></button>
@@ -191,7 +190,7 @@
                 </div>
             </div>
 
-            <!-- ✅ PREMIUM FEATURES SECTION -->
+            <!-- ✅ PREMIUM FEATURES SECTION (With GIFs) -->
             <div class="card features-section">
                 <h2 class="section-title">✨ Premium Features</h2>
                 <p class="section-subtitle">Everything you need to supercharge your learning</p>
@@ -223,7 +222,7 @@
 
     <script src="script.js"></script>
     <script>
-        // Premium features data
+        // Premium features data with GIFs
         const premiumFeatures = [
             { title: 'Access to Learny AI', desc: 'Unlimited Messages & Quiz Generator', gif: 'https://i.postimg.cc/59QKjRtC/ai-assistant-(1).gif' },
             { title: 'No AD Breaks', desc: 'Remove all pop-up ads & only focus study', gif: 'https://i.postimg.cc/gch4GLMX/ad-blocker.gif' },
@@ -285,7 +284,7 @@
                 </div>`).join('');
         }
 
-        // Auto-scroll features (Desktop only for better UX)
+        // Auto-scroll features (Desktop only)
         function autoScrollFeatures() {
             if (window.innerWidth > 768) {
                 const l = document.getElementById('features-left'), r = document.getElementById('features-right');
@@ -319,7 +318,7 @@
             function toggleSB() { sb?.classList.toggle('open'); ov.classList.toggle('show'); }
             hb?.addEventListener('click', toggleSB); ov.addEventListener('click', toggleSB);
 
-            // Premium Check
+            // Premium Status Check
             if (localStorage.getItem('is_premium') === 'true') {
                 document.querySelectorAll('.pricing-card').forEach(c => {
                     c.style.opacity = '0.6'; c.style.pointerEvents = 'none';
