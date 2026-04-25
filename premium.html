@@ -7,101 +7,55 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ✅ PRICING - ORIGINAL SIZES PRESERVED */
-        .pricing-grid { margin-bottom: 40px; }
-        .pricing-card { 
-            position: relative; display: flex; flex-direction: column; height: 100%; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; 
-            background: var(--bg-card); border: 1px solid var(--border); 
-            border-radius: var(--radius); padding: 24px;
-        }
-        .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
-        .pricing-card.popular { border-color: var(--warning); box-shadow: 0 0 30px rgba(245, 158, 11, 0.2); }
-        .popular-badge { 
-            position: absolute; top: -12px; right: 20px; background: var(--warning); 
-            color: #000; padding: 5px 16px; border-radius: 20px; 
-            font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; 
-        }
-        .price-section { text-align: center; margin: 20px 0; }
-        .old-price { text-decoration: line-through; color: var(--text-muted); font-size: 16px; display: block; margin-bottom: 8px; }
-        /* ✅ KEEP DESKTOP SIZE ON MOBILE - 34px */
-        .new-price { font-size: 34px; font-weight: 800; color: var(--primary-light); display: block; }
-        .new-price span { font-size: 16px; font-weight: 500; color: var(--text-muted); }
-        .plan-desc { text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
-        .plan-features { list-style: none; padding: 0; margin: 0 0 24px 0; flex: 1; }
-        .plan-features li { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text-main); display: flex; align-items: center; gap: 12px; }
-        .plan-features li:last-child { border-bottom: none; }
-        .plan-features li i { color: var(--success); font-size: 16px; }
-        .discount-badge { display: inline-block; background: rgba(16, 185, 129, 0.15); color: var(--success); padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; margin-bottom: 8px; }
-        
-        /* ✅ Premium Features Section - Professional with GIFs */
-        .features-section { margin: 40px 0; }
-        .section-title {
-            text-align: center; font-size: 26px; font-weight: 800; margin-bottom: 12px;
-            background: linear-gradient(135deg, var(--primary-light), var(--text-bright));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 32px; font-size: 15px; }
+        /* Feature Cards - matches your design system */
+        .features-section { margin-bottom: 24px; }
         .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .features-column {
-            display: flex; flex-direction: column; gap: 16px;
-            max-height: 600px; overflow-y: auto; padding-right: 8px;
+        .features-column { 
+            background: var(--bg-card); 
+            border-radius: var(--radius); 
+            border: 1px solid var(--border);
+            padding: 16px; 
+            max-height: 520px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px;
         }
-        .features-column::-webkit-scrollbar { width: 4px; }
-        .features-column::-webkit-scrollbar-track { background: transparent; }
-        .features-column::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
         .feature-card {
-            display: flex; gap: 16px; padding: 18px; background: var(--bg-card);
+            display: flex; gap: 14px; align-items: flex-start;
+            padding: 14px; background: var(--bg-dark);
             border-radius: var(--radius-sm); border: 1px solid var(--border);
-            transition: all var(--transition); align-items: flex-start;
+            transition: all var(--transition);
         }
-        .feature-card:hover {
-            border-color: var(--primary); transform: translateX(6px);
-            background: rgba(108, 43, 217, 0.08); box-shadow: 0 4px 12px rgba(108, 43, 217, 0.15);
+        .feature-card:hover { border-color: var(--primary); transform: translateX(3px); }
+        .feature-gif { 
+            width: 56px; height: 56px; border-radius: 12px; 
+            object-fit: cover; flex-shrink: 0; 
+            background: rgba(108, 43, 217, 0.15);
         }
-        .feature-gif { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; flex-shrink: 0; background: var(--bg-dark); border: 2px solid var(--border); }
-        .feature-info h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text-main); }
-        .feature-info p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+        .feature-info h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: var(--text-main); }
+        .feature-info p { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin: 0; }
         
-        /* ✅ Testimonials Grid */
-        .testimonials-section { margin: 40px 0; }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        /* Testimonials */
+        .testimonials-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 16px; margin-top: 16px; 
+        }
         .testimonial-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: var(--radius); padding: 24px; transition: all var(--transition); position: relative;
+            background: var(--bg-dark); border: 1px solid var(--border);
+            border-radius: var(--radius-sm); padding: 20px;
+            transition: all var(--transition);
         }
-        .testimonial-card::before {
-            content: '"'; position: absolute; top: 16px; right: 24px;
-            font-size: 60px; color: var(--primary); opacity: 0.2;
-            font-family: serif; line-height: 1;
-        }
-        .testimonial-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow); }
-        .testimonial-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
-        .testimonial-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
-        .testimonial-info { flex: 1; }
-        .testimonial-name { font-weight: 700; font-size: 15px; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
+        .testimonial-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .testimonial-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .testimonial-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+        .testimonial-name { font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; }
         .premium-badge-small { width: 16px; height: 16px; }
-        .testimonial-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin: 0; font-style: italic; }
-        
-        /* ✅ Mobile Responsive - PRICE SIZES PRESERVED */
+        .testimonial-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
         @media (max-width: 768px) {
-            .features-grid { grid-template-columns: 1fr; gap: 16px; }
-            .features-column { max-height: none; overflow-y: visible; padding-right: 0; }
-            .feature-card { padding: 14px; }
-            .feature-gif { width: 50px; height: 50px; }
-            .testimonials-grid { grid-template-columns: 1fr; }
-            .grid-equal { grid-template-columns: 1fr; }
-            /* ✅ PRICE SIZE KEPT EXACTLY AS DESKTOP - 34px */
-            .new-price { font-size: 34px !important; }
-            .pricing-card { max-width: 100%; margin: 0 auto; padding: 20px 16px; }
-        }
-        @media (max-width: 480px) {
-            .section-title { font-size: 22px; }
-            .feature-card { flex-direction: column; align-items: center; text-align: center; }
-            .feature-info h3 { font-size: 14px; }
-            .feature-info p { font-size: 12px; }
-            /* ✅ SMALL MOBILE - PRICE SIZE STILL 34px */
-            .new-price { font-size: 34px !important; }
+            .features-grid { grid-template-columns: 1fr; }
+            .features-column { max-height: 400px; }
         }
     </style>
 </head>
@@ -111,137 +65,176 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">L</div>
-                <span class="sidebar-title">Learny</span>
+                <div class="sidebar-title">Learny</div>
             </div>
             <ul class="nav-list">
                 <li class="nav-item"><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
                 <li class="nav-item"><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
                 <li class="nav-item"><a href="bot.html"><i class="fas fa-robot"></i> LearnyAI</a></li>
-                <li class="nav-item"><a href="tasks.html"><i class="fas fa-check-circle"></i> Tasks</a></li>
+                <li class="nav-item"><a href="tasks.html"><i class="fas fa-tasks"></i> Tasks</a></li>
                 <li class="nav-item"><a href="time.html"><i class="fas fa-clock"></i> Time Tracker</a></li>
                 <li class="nav-item"><a href="achievements.html"><i class="fas fa-trophy"></i> Achievements</a></li>
-                <li class="nav-item"><a href="motivation.html"><i class="fas fa-fire"></i> Motivation</a></li>
+                <li class="nav-item"><a href="motivation.html"><i class="fas fa-lightbulb"></i> Motivation</a></li>
                 <li class="nav-item"><a href="music.html"><i class="fas fa-music"></i> Music</a></li>
                 <li class="nav-item"><a href="pomodoro.html"><i class="fas fa-stopwatch"></i> Pomodoro</a></li>
-                <li class="nav-item"><a href="mark.html"><i class="fas fa-chart-bar"></i> Mark Analyze</a></li>
+                <li class="nav-item"><a href="mark.html"><i class="fas fa-chart-line"></i> Mark Analyze</a></li>
                 <li class="nav-item"><a href="pastpapers.html"><i class="fas fa-file-alt"></i> Past Papers</a></li>
-                <li class="nav-item"><a href="countdown.html"><i class="fas fa-hourglass-half"></i> Countdown</a></li>
+                <li class="nav-item"><a href="countdown.html"><i class="fas fa-hourglass-end"></i> Countdown</a></li>
+                <li class="nav-item premium-nav-item"><a href="premium.html" class="premium-link active"><i class="fas fa-gem"></i> Premium</a></li>
                 <li class="nav-item"><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
                 <li class="nav-item"><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
                 <li class="nav-item"><a href="rate.html"><i class="fas fa-star"></i> Rate Us</a></li>
             </ul>
+            <div class="sidebar-welcome">
+                <p>Powered by</p>
+                <a href="contact.html" class="welcome-text">DC</a>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <div class="page-header">
-                <h1 class="page-title"><i class="fas fa-gem"></i> Premiummm</h1>
+            <header class="page-header">
+                <button class="hamburger"><i class="fas fa-bars"></i></button>
+                <h1 class="page-title"><i class="fas fa-gem"></i> Premium</h1>
                 <div class="header-actions">
-                    <button class="hamburger"><i class="fas fa-bars"></i></button>
                     <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+                    <button class="notif-btn"><i class="fas fa-bell"></i></button>
+                </div>
+            </header>
+
+            <!-- Greeting Banner -->
+            <div class="greeting-banner mb-3">
+                <div class="greeting-content">
+                    <img src="https://i.postimg.cc/nrFwN8kn/gem.png" alt="Premium Icon" class="greeting-avatar">
+                    <div class="greeting-text-container">
+                        <h2 class="greeting-full">Welcome, User!</h2>
+                        <p class="greeting-sub">Unlock Premium. Get exclusive access to all features and take your learning experience to the next level!</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="hero-content text-center mb-3">
-                <img src="https://i.postimg.cc/nrFwN8kn/gem.png" alt="Premium Gem" style="width: 80px; margin-bottom: 16px;">
-                <h1 style="font-size: 28px; font-weight: 800; margin-bottom: 12px;">Unlock Premium</h1>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 24px;">Get exclusive access to all features and take your learning experience to the next level!</p>
-            </div>
-
-            <!-- ✅ PRICING SECTION -->
-            <div class="grid-equal pricing-grid">
+            <!-- TWO PRICING OPTIONS -->
+            <div class="grid-equal mb-3">
                 <!-- Individual Plan -->
-                <div class="card pricing-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Individual</h3>
-                        <span class="discount-badge">LKR 500 OFF</span>
+                <div class="card" style="text-align: center; padding: 32px 20px; display: flex; flex-direction: column; align-items: center;">
+                    <div class="stat-icon purple" style="width: 64px; height: 64px; font-size: 28px; margin-bottom: 16px;">
+                        <i class="fas fa-user"></i>
                     </div>
-                    <div class="price-section">
-                        <span class="old-price">LKR 2699</span>
-                        <span class="new-price">LKR 2199<span>/year</span></span>
+                    <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 12px;">Individual</h3>
+                    <div style="margin-bottom: 12px;">
+                        <span style="text-decoration: line-through; color: var(--text-muted); font-size: 16px;">LKR 2699</span>
+                        <span style="font-size: 34px; font-weight: 900; color: var(--primary-light); margin: 0 8px;">LKR 2199</span>
                     </div>
-                    <p class="plan-desc">Limited time offer.<br>Access to <strong>one premium account</strong>.</p>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check-circle"></i> 1 Premium Account</li>
-                        <li><i class="fas fa-check-circle"></i> All Features Unlocked</li>
-                        <li><i class="fas fa-check-circle"></i> Standard Support</li>
-                    </ul>
-                    <a href="https://wa.me/94764720488?text=Hi!%20I%20want%20to%20buy%20the%20Individual%20Premium%20Plan" class="btn btn-secondary btn-lg w-full">Get Individual Plan</a>
+                    <div style="background: var(--primary); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 12px;">
+                        LKR 500 OFF - Limited Time
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px;">Access to one premium account</p>
+                    <a href="https://wa.me/94764720488" class="btn btn-primary btn-lg w-full" style="justify-content: center;">
+                        <i class="fab fa-whatsapp"></i> Get Premium Now
+                    </a>
                 </div>
 
                 <!-- Group Plan -->
-                <div class="card pricing-card popular">
-                    <div class="popular-badge">Popular</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Group</h3>
-                        <span class="discount-badge">LKR 1600 OFF</span>
+                <div class="card" style="text-align: center; padding: 32px 20px; border-color: var(--warning); position: relative; display: flex; flex-direction: column; align-items: center;">
+                    <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--warning); color: #000; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap;">
+                        POPULAR
                     </div>
-                    <div class="price-section">
-                        <span class="old-price">LKR 6600</span>
-                        <span class="new-price">LKR 4999<span>/year</span></span>
+                    <div class="stat-icon orange" style="width: 64px; height: 64px; font-size: 28px; margin-bottom: 16px;">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <p class="plan-desc">Buy with friends!<br>Access to <strong>three premium accounts</strong>.</p>
-                    <ul class="plan-features">
-                        <li><i class="fas fa-check-circle"></i> 3 Premium Accounts</li>
-                        <li><i class="fas fa-check-circle"></i> All Features Unlocked</li>
-                        <li><i class="fas fa-check-circle"></i> Best Value</li>
-                    </ul>
-                    <a href="https://wa.me/94764720488?text=Hi!%20I%20want%20to%20buy%20the%20Group%20Premium%20Plan" class="btn btn-primary btn-lg w-full">Get Group Plan</a>
+                    <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 12px;">Group</h3>
+                    <div style="margin-bottom: 12px;">
+                        <span style="text-decoration: line-through; color: var(--text-muted); font-size: 16px;">LKR 6600</span>
+                        <span style="font-size: 34px; font-weight: 900; color: var(--warning); margin: 0 8px;">LKR 4999</span>
+                    </div>
+                    <div style="background: var(--warning); color: #000; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 12px;">
+                        LKR 1600 OFF
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 24px;">Access to three premium accounts - Buy with friends</p>
+                    <a href="https://wa.me/94764720488" class="btn btn-warning btn-lg w-full" style="justify-content: center;">
+                        <i class="fab fa-whatsapp"></i> Get Premium Now
+                    </a>
                 </div>
             </div>
 
-            <!-- ✅ PREMIUM FEATURES SECTION (With GIFs) -->
-            <div class="card features-section">
-                <h2 class="section-title">✨ Premium Features</h2>
-                <p class="section-subtitle">Everything you need to supercharge your learning</p>
+            <!-- Premium Features Section -->
+            <div class="card mb-3 features-section">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-star"></i> Premium Features</h3>
+                </div>
                 <div class="features-grid">
                     <div id="features-left" class="features-column"></div>
                     <div id="features-right" class="features-column"></div>
                 </div>
             </div>
 
-            <!-- ✅ TESTIMONIALS SECTION -->
-            <div class="card testimonials-section">
-                <h2 class="section-title">What Our Premium Users Say</h2>
-                <p class="section-subtitle">Join thousands of satisfied learners</p>
+            <!-- Testimonials -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fas fa-comments"></i> What Our Premium Users Say</h3>
+                </div>
+                <p style="color: var(--text-muted); text-align: center; padding: 8px 0 16px; font-size: 14px;">Join thousands of satisfied learners</p>
                 <div id="testimonials-grid" class="testimonials-grid"></div>
             </div>
 
-            <!-- ✅ CTA SECTION -->
-            <div class="card text-center" style="background: linear-gradient(135deg, var(--bg-card) 0%, rgba(108, 43, 217, 0.1) 100%); border-color: var(--primary);">
-                <h2 style="font-size: 24px; margin-bottom: 12px;">Ready to Upgrade?</h2>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Start your premium journey today and unlock your full potential!</p>
-                <a href="https://wa.me/94764720488" class="btn btn-primary btn-lg"><i class="fab fa-whatsapp"></i> Contact Us</a>
+            <!-- CTA Section -->
+            <div class="card mb-3 text-center" style="padding: 40px 20px; background: linear-gradient(135deg, var(--bg-card) 0%, rgba(108, 43, 217, 0.08) 100%);">
+                <h2 style="font-size: 28px; font-weight: 800; margin-bottom: 12px;">Ready to Upgrade?</h2>
+                <p style="color: var(--text-muted); font-size: 16px; margin-bottom: 24px;">Start your premium journey today and unlock your full potential!</p>
+                <a href="https://wa.me/94764720488" class="btn btn-primary btn-lg">
+                    <i class="fab fa-whatsapp"></i> Contact Us
+                </a>
             </div>
-
-            <footer class="site-footer">
-                Powered by <a href="contact.html">DC</a> | Made in Sri Lanka 🇱🇰
-            </footer>
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <footer class="site-footer">
+        Powered by <a href="contact.html">DC</a> | Made in Sri Lanka 🇱🇰
+    </footer>
+
+    <!-- Optional Overlay for Mobile -->
+    <div class="overlay" onclick="document.querySelector('.sidebar').classList.remove('open'); this.classList.remove('show');"></div>
+
     <script>
-        // Premium features data with GIFs
+        // Sidebar Toggle
+        document.querySelector('.hamburger')?.addEventListener('click', () => {
+            document.querySelector('.sidebar').classList.toggle('open');
+            document.querySelector('.overlay').classList.toggle('show');
+        });
+
+        // Theme Toggle
+        document.querySelector('.theme-toggle')?.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+            const icon = document.querySelector('.theme-toggle i');
+            if (document.body.classList.contains('light')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Premium features data
         const premiumFeatures = [
             { title: 'Access to Learny AI', desc: 'Unlimited Messages & Quiz Generator', gif: 'https://i.postimg.cc/59QKjRtC/ai-assistant-(1).gif' },
             { title: 'No AD Breaks', desc: 'Remove all pop-up ads & only focus study', gif: 'https://i.postimg.cc/gch4GLMX/ad-blocker.gif' },
-            { title: 'Get Verification Badge', desc: 'Stand out with an exclusive premium verification badge', gif: 'https://i.postimg.cc/CLdc8s6V/premium-quality.gif' },
-            { title: 'Offline Work', desc: 'Access your study materials without internet', gif: 'https://i.postimg.cc/DZFCbVRt/no-signal.gif' },
-            { title: 'Track Subscriptions', desc: 'Advanced analytics to monitor your progress', gif: 'https://i.postimg.cc/vZfL7qrv/analytics.gif' },
-            { title: 'VIP Membership', desc: 'Join exclusive community with special privileges', gif: 'https://i.postimg.cc/zfw7Nt3x/membership.gif' },
-            { title: 'Export Data to PDF', desc: 'Download study reports and achievements as PDF', gif: 'https://i.postimg.cc/Hk93Dvrk/pdf.gif' },
-            { title: 'All Avatars Unlocked', desc: 'Access all 14+ premium avatars freely', gif: 'https://i.postimg.cc/HLT5wpsJ/success.gif' },
-            { title: 'Unlocked All Features', desc: 'Get unlimited access to every feature', gif: 'https://i.postimg.cc/XN5f61hp/padlock.gif' },
-            { title: '24 Hours Support', desc: 'Priority customer support available 24/7', gif: 'https://i.postimg.cc/26M7FPKG/support.gif' },
-            { title: 'Upload Your Songs', desc: 'Create personalized study playlist', gif: 'https://i.postimg.cc/7Lc2pSnK/upload.gif' },
-            { title: 'Access to All Devices', desc: 'Sync your data across all devices', gif: 'https://i.postimg.cc/6pp4qMHh/digital-native.gif' }
+            { title: 'Get Verification Badge', desc: 'Stand out with an exclusive premium verification badge next to your name', gif: 'https://i.postimg.cc/CLdc8s6V/premium-quality.gif' },
+            { title: 'Offline Work', desc: 'Access your study materials and track progress even without internet connection', gif: 'https://i.postimg.cc/DZFCbVRt/no-signal.gif' },
+            { title: 'Track Subscriptions', desc: 'Advanced analytics to monitor your learning progress and study patterns', gif: 'https://i.postimg.cc/vZfL7qrv/analytics.gif' },
+            { title: 'VIP Membership', desc: 'Join an exclusive community of premium learners with special privileges', gif: 'https://i.postimg.cc/zfw7Nt3x/membership.gif' },
+            { title: 'Export Data to PDF', desc: 'Download your study reports, progress charts, and achievements as PDF', gif: 'https://i.postimg.cc/Hk93Dvrk/pdf.gif' },
+            { title: 'All Avatars Unlocked', desc: 'Access all 14+ premium avatars and customize your profile freely', gif: 'https://i.postimg.cc/HLT5wpsJ/success.gif' },
+            { title: 'Unlocked All Features', desc: 'Get unlimited access to every feature in the Learny app', gif: 'https://i.postimg.cc/XN5f61hp/padlock.gif' },
+            { title: '24 Hours Support', desc: 'Priority customer support available 24/7 to help you anytime', gif: 'https://i.postimg.cc/26M7FPKG/support.gif' },
+            { title: 'Upload Your Songs', desc: 'Create your personalized study playlist with your favorite music', gif: 'https://i.postimg.cc/7Lc2pSnK/upload.gif' },
+            { title: 'Access to All Devices', desc: 'Sync your data across all your devices seamlessly', gif: 'https://i.postimg.cc/6pp4qMHh/digital-native.gif' }
         ];
 
         // Testimonials data
         const testimonials = [
             { name: 'Kusal Hewage', avatar: 'https://i.postimg.cc/QdPYLqrV/AIRetouch-20260412-135002012.png', text: 'Learny Premium has transformed my study routine. Learny AI is perfect bro.', isPremium: true },
-            { name: 'Nimali Silva', avatar: 'https://i.postimg.cc/vmJKntqc/AIRetouch-20260412-134105556.png', text: 'Best investment for my education. The analytics help me track my progress effectively.', isPremium: true },
+            { name: 'Nimali Silva', avatar: 'https://i.postimg.cc/vmJKntqc/AIRetouch-20260412-134105556.png', text: 'Best investment for my education. The analytics help me track my progress effectively. Thank you Learny Team.', isPremium: true },
             { name: 'Kasun Bandara', avatar: 'https://i.postimg.cc/DyvM1Zgn/AIRetouch-20260412-134857396.png', text: 'Website eka nam superbbbbbb.', isPremium: true },
             { name: 'Dilini Fernando', avatar: 'https://i.postimg.cc/CKqPwfhV/AIRetouch-20260412-134937423.png', text: 'I love being able to upload my own study music. Highly recommended!', isPremium: true },
             { name: 'Wishaka Perera', avatar: 'https://i.postimg.cc/Twvk1Y1m/AIRetouch-20260412-140516089.png', text: 'Learny AI is awesome. I love this and recommended.', isPremium: true },
@@ -250,96 +243,75 @@
 
         // Render features
         function renderFeatures() {
-            const left = document.getElementById('features-left');
-            const right = document.getElementById('features-right');
-            if (!left || !right) return;
-            const mid = Math.ceil(premiumFeatures.length / 2);
-            left.innerHTML = premiumFeatures.slice(0, mid).map(f => `
+            const leftContainer = document.getElementById('features-left');
+            const rightContainer = document.getElementById('features-right');
+            const midPoint = Math.ceil(premiumFeatures.length / 2);
+            const leftFeatures = premiumFeatures.slice(0, midPoint);
+            const rightFeatures = premiumFeatures.slice(midPoint);
+            
+            leftContainer.innerHTML = leftFeatures.map(feature => `
                 <div class="feature-card">
-                    <img src="${f.gif}" alt="${f.title}" class="feature-gif">
-                    <div class="feature-info"><h3>${f.title}</h3><p>${f.desc}</p></div>
-                </div>`).join('');
-            right.innerHTML = premiumFeatures.slice(mid).map(f => `
+                    <img src="${feature.gif}" alt="${feature.title}" class="feature-gif">
+                    <div class="feature-info">
+                        <h3>${feature.title}</h3>
+                        <p>${feature.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+            
+            rightContainer.innerHTML = rightFeatures.map(feature => `
                 <div class="feature-card">
-                    <img src="${f.gif}" alt="${f.title}" class="feature-gif">
-                    <div class="feature-info"><h3>${f.title}</h3><p>${f.desc}</p></div>
-                </div>`).join('');
+                    <img src="${feature.gif}" alt="${feature.title}" class="feature-gif">
+                    <div class="feature-info">
+                        <h3>${feature.title}</h3>
+                        <p>${feature.desc}</p>
+                    </div>
+                </div>
+            `).join('');
         }
 
         // Render testimonials
         function renderTestimonials() {
             const grid = document.getElementById('testimonials-grid');
-            if (!grid) return;
             grid.innerHTML = testimonials.map(t => `
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <img src="${t.avatar}" alt="${t.name}" class="testimonial-avatar">
                         <div class="testimonial-info">
-                            <div class="testimonial-name">${t.name}
-                                ${t.isPremium ? '<img src="https://i.postimg.cc/nrFwN8kn/gem.png" class="premium-badge-small" title="Premium">' : ''}
+                            <div class="testimonial-name">
+                                ${t.name}
+                                ${t.isPremium ? '<img src="https://i.postimg.cc/nrFwN8kn/gem.png" alt="Premium" class="premium-badge-small" title="Premium User">' : ''}
                             </div>
                         </div>
                     </div>
                     <p class="testimonial-text">${t.text}</p>
-                </div>`).join('');
+                </div>
+            `).join('');
         }
 
-        // Auto-scroll features (Desktop only)
+        // Auto-scroll features
         function autoScrollFeatures() {
-            if (window.innerWidth > 768) {
-                const l = document.getElementById('features-left'), r = document.getElementById('features-right');
-                if (l && r) {
-                    let lp = 0, rp = 0;
-                    setInterval(() => {
-                        lp += 0.3; if (lp >= l.scrollHeight - l.clientHeight) lp = 0; l.scrollTop = lp;
-                        rp += 0.3; if (rp >= r.scrollHeight - r.clientHeight) rp = 0; r.scrollTop = rp;
-                    }, 50);
-                }
+            const leftContainer = document.getElementById('features-left');
+            const rightContainer = document.getElementById('features-right');
+            if (leftContainer && rightContainer) {
+                let leftPos = 0, rightPos = 0;
+                setInterval(() => {
+                    leftPos += 0.5;
+                    if (leftPos >= leftContainer.scrollHeight - leftContainer.clientHeight) leftPos = 0;
+                    leftContainer.scrollTop = leftPos;
+                    rightPos += 0.5;
+                    if (rightPos >= rightContainer.scrollHeight - rightContainer.clientHeight) rightPos = 0;
+                    rightContainer.scrollTop = rightPos;
+                }, 50);
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            renderFeatures(); renderTestimonials(); autoScrollFeatures();
-            
-            // Theme Toggle
-            const tt = document.querySelector('.theme-toggle'), body = document.body;
-            if (localStorage.getItem('learny-theme') === 'light') body.classList.add('light');
-            function updIcon() { const i = tt?.querySelector('i'); if (i) i.className = body.classList.contains('light') ? 'fas fa-moon' : 'fas fa-sun'; }
-            updIcon();
-            tt?.addEventListener('click', () => {
-                body.classList.toggle('light');
-                localStorage.setItem('learny-theme', body.classList.contains('light') ? 'light' : 'dark');
-                updIcon();
-            });
-
-            // Mobile Sidebar
-            const hb = document.querySelector('.hamburger'), sb = document.querySelector('.sidebar');
-            const ov = document.createElement('div'); ov.className = 'overlay'; document.body.appendChild(ov);
-            function toggleSB() { sb?.classList.toggle('open'); ov.classList.toggle('show'); }
-            hb?.addEventListener('click', toggleSB); ov.addEventListener('click', toggleSB);
-
-            // Premium Status Check
-            if (localStorage.getItem('is_premium') === 'true') {
-                document.querySelectorAll('.pricing-card').forEach(c => {
-                    c.style.opacity = '0.6'; c.style.pointerEvents = 'none';
-                    const b = c.querySelector('a'); if (b) {
-                        b.textContent = 'Already Active';
-                        b.classList.remove('btn-primary','btn-secondary'); b.classList.add('btn','btn-success');
-                    }
-                });
-            }
-
-            // Fade-in on scroll
-            const obs = new IntersectionObserver(es => es.forEach(e => {
-                if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
-            }), { threshold: 0.1 });
-            document.querySelectorAll('.card,.pricing-card,.feature-card,.testimonial-card').forEach(el => {
-                el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                obs.observe(el);
-            });
-
-            if (typeof APP !== 'undefined' && typeof APP.updateGreetingUI === 'function') APP.updateGreetingUI();
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFeatures();
+            renderTestimonials();
+            autoScrollFeatures();
+            if (typeof APP !== 'undefined') APP.updateGreetingUI();
         });
     </script>
 </body>
